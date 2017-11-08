@@ -1,0 +1,42 @@
+package tn11;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+
+
+public class testtn11 {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+
+		DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+		capabilities.setCapability("marionette", true);
+		
+		WebDriver driver = new FirefoxDriver();
+		
+		N11LoginScreenObjects page = new N11LoginScreenObjects(driver);
+		
+		page.ClickGýrýsYap();
+		/*
+		page.ClickFaceGýrýsYap();
+		
+		String winHandleBefore = driver.getWindowHandle();	  
+		  for(String winHandle : driver.getWindowHandles()){
+			    driver.switchTo().window(winHandle); 
+			    
+			}
+		  */
+		Thread.sleep(2000);
+		page.Login();
+		Thread.sleep(2000);
+		//driver.switchTo().window(winHandleBefore);
+		N11UserScreenObjects page1 = new N11UserScreenObjects(driver);
+		page1.Arat("Samsung");
+	    //page1.FavorilereEkle();
+	}
+	
+	
+
+}

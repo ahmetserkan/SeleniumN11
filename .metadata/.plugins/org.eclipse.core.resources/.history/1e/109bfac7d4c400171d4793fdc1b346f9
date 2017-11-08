@@ -1,0 +1,91 @@
+package tn11;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+public class Junittest {
+    
+	
+	
+	@Before
+	public void testSetup() {
+		
+		DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+		capabilities.setCapability("marionette", true);
+		WebDriver driver = new FirefoxDriver();
+		
+		
+	}
+	
+	@After
+	public void testShutDown(WebDriver driver) {
+		
+		driver.quit();
+
+	}
+	
+	@Test
+	public void Testing(WebDriver driver) {
+		
+        
+		N11LoginScreenObjects page = new N11LoginScreenObjects(driver);
+		
+		try {
+			page.ClickGýrýsYap();
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
+		
+		try {
+			page.Login();
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	@Test
+	public void Testing2(WebDriver driver) throws InterruptedException {
+		
+        
+		N11UserScreenObjects page1 = new N11UserScreenObjects(driver);
+		try {
+			page1.Arat("Samsung");
+		} catch (InterruptedException e) {
+		
+			e.printStackTrace();
+		}
+	    
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,400)", "");
+		Thread.sleep(1000);
+
+	    page1.SayfaDegistir();
+	   
+	    JavascriptExecutor je = (JavascriptExecutor) driver;
+		WebElement element = driver.findElement(By.xpath(".//*[@id='p-130645823']"));
+		je.executeScript("arguments[0].scrollIntoView(true);",element);
+	    Thread.sleep(2000);  
+	    
+	    page1.FavorilereEkle();
+	    	    
+	    page1.FavorilereGit();
+	    
+	    page1.FavorilerdenCikar();
+		
+		
+	}
+	
+
+
+}
